@@ -12,12 +12,16 @@ public class DoublyLinkedListDriver {
         System.out.println("Enter list type (i - int, d - double, s - string): ");
         String type = scanner.next();
 
+        System.out.println("(i) - Insert Value\n(d) - Delete Value\n(p) - Print list\n(l) - Length");
+        System.out.println("(t) - Print reverse\n(r) - Reverse list\n(b) - Delete Subsection");
+        System.out.println("(s) - Swap Alternate\n(q) - Quit program");
+
         try {
             Scanner fileScanner = new Scanner(new File(args[0]));
             if (type.equals("i")) {
                 DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
                 while (fileScanner.hasNextInt()) {
-                    list.insertItem(fileScanner.nextInt());
+                  list.insertItem(fileScanner.nextInt());
                 }
                 processCommands(scanner, list);
             } else if (type.equals("d")) {
@@ -34,6 +38,8 @@ public class DoublyLinkedListDriver {
                 processCommands(scanner, list);
             }
             fileScanner.close();
+
+
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found.");
         }
