@@ -124,4 +124,8 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         }
         print();
     }
+
+    public NodeType<T> getFirst() {
+        return head;
+    }
 }

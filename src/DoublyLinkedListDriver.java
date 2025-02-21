@@ -12,6 +12,8 @@ public class DoublyLinkedListDriver {
         System.out.println("Enter list type (i - int, d - double, s - string): ");
         String type = scanner.next();
 
+
+
         try {
             Scanner fileScanner = new Scanner(new File(args[0]));
             if (type.equals("i")) {
@@ -49,6 +51,30 @@ public class DoublyLinkedListDriver {
             else if (command.equals("l")) System.out.println("The length of the list is " + list.length());
             else if (command.equals("r")) list.reverseList();
             else if (command.equals("s")) list.swapAlt();
+            else if (command.equals("i")) list.insertItem((T)scanner.next());
+            else if (command.equals("d")) {
+                System.out.print("The list is: " );
+                list.print();
+                System.out.println("Enter a number to delete: ");
+                T item = parseInput(scanner, list.getFirst().info.getClass());
+                list.deleteItem(item);
+            }
+
+            
+            list.print();
+            list.printReverse();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T extends Comparable<T>> T parseInput(Scanner scanner, Class<?> type) {
+        String input = scanner.next();
+        if (type == Integer.class) {
+            return (T) Integer.valueOf(input);
+        } else if (type == Double.class) {
+            return (T) Double.valueOf(input);
+        } else {
+            return (T) input;
         }
     }
 }
