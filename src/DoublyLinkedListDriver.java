@@ -3,11 +3,16 @@ import java.io.*;
 import java.util.*;
 
 public class DoublyLinkedListDriver {
-
+    
+    
     private static String listType;
+    /**
+     * Main method for the doubly linked list driver
+     * Written by David Uzor
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         if (args.length < 1) {
-            System.out.println("Usage: java LinkedListDriver <input-file>");
             return;
         }
         Scanner scanner = new Scanner(System.in);
@@ -49,9 +54,14 @@ public class DoublyLinkedListDriver {
         }
     }
 
+    /**
+     * Process commands for the doubly linked list
+     * Written by Million Yohannes
+     * @param scanner the scanner to read input from
+     * @param list the doubly linked list to process commands on
+     */
     private static <T extends Comparable<T>> void processCommands(Scanner scanner, DoublyLinkedList<T> list) {
         while (true) {
-            System.out.println("Enter a command:");
             String command = scanner.next();
             
             if (command.equals("q")) break;
@@ -66,20 +76,24 @@ public class DoublyLinkedListDriver {
                 System.out.println(list);
             }
             else if (command.equals("s")) {
-                list.print();
+                System.out.print("The original list: ");
+                System.out.println(list);
                 list.swapAlt();
-                list.print();
+                System.out.print("The modified list: ");
+                System.out.println(list);
                 list.printReverse();
             }
             else if (command.equals("b")) {
+
+                String originalList = list.toString();
                 list.print();
                 System.out.println("Enter lower bound: ");
-                T lowerBound = parseInput(scanner, list.getFirst().info.getClass());
+                T lowerBound = parseInput(scanner, listType.equals("i") ? Integer.class : listType.equals("d") ? Double.class : String.class);
                 System.out.println("Enter upper bound: ");
-                T upperBound = parseInput(scanner, list.getFirst().info.getClass());
+                T upperBound = parseInput(scanner, listType.equals("i") ? Integer.class : listType.equals("d") ? Double.class : String.class);
                 list.deleteSubsection(lowerBound, upperBound);
-                list.print();
-                list.printReverse();
+                System.out.println("The original list: " + originalList);
+                System.out.println("The modified list: " + list.toString());
             }
             else if (command.equals("i")) {
                 list.print();
@@ -90,7 +104,7 @@ public class DoublyLinkedListDriver {
                 } else {
                     System.out.println("Enter a string to insert: ");
                 }
-                T item = parseInput(scanner, list.getFirst().info.getClass());
+                T item = parseInput(scanner, listType.equals("i") ? Integer.class : listType.equals("d") ? Double.class : String.class);      
                 list.insertItem(item);
 
                 list.print();
@@ -108,7 +122,7 @@ public class DoublyLinkedListDriver {
                 if (listType.equals("s")) {
                     System.out.println("Enter a string to delete: ");
                 }
-                T item = parseInput(scanner, list.getFirst().info.getClass());
+                T item = parseInput(scanner, listType.equals("i") ? Integer.class : listType.equals("d") ? Double.class : String.class);
                 list.deleteItem(item);
                 list.print();
                 list.printReverse();
@@ -118,6 +132,16 @@ public class DoublyLinkedListDriver {
         }
     }
 
+
+
+    /**
+     * Parse input for the doubly linked list
+     * Written by David Uzor
+     * @param <T>
+     * @param scanner
+     * @param type
+     * @return
+     */
     @SuppressWarnings("unchecked")
     private static <T extends Comparable<T>> T parseInput(Scanner scanner, Class<?> type) {
         String input = scanner.next();
