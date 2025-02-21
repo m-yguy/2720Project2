@@ -1,6 +1,6 @@
+// DoublyLinkedList.java
 import java.util.*;
 
-// DoublyLinkedList.java
 public class DoublyLinkedList<T extends Comparable<T>> {
     private NodeType<T> head;
 
@@ -28,6 +28,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             current.next = newNode;
             newNode.back = current;
         }
+        print();
     }
 
     public void deleteItem(T item) {
@@ -46,6 +47,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         if (current.back != null) current.back.next = current.next;
         if (current.next != null) current.next.back = current.back;
         if (current == head) head = current.next;
+        print();
     }
 
     public int length() {
@@ -109,6 +111,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             current = current.back;
         }
         if (temp != null) head = temp.back;
+        print();
     }
 
     public void swapAlt() {
@@ -119,5 +122,6 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             current.next.info = temp;
             current = current.next.next;
         }
+        print();
     }
 }
