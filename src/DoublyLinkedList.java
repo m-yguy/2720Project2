@@ -28,7 +28,6 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             current.next = newNode;
             newNode.back = current;
         }
-        print();
     }
 
     public void deleteItem(T item) {
@@ -47,7 +46,6 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         if (current.back != null) current.back.next = current.next;
         if (current.next != null) current.next.back = current.back;
         if (current == head) head = current.next;
-        print();
     }
 
     public int length() {
@@ -101,17 +99,34 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         }
     }
 
-    public void reverseList() {
-        NodeType<T> temp = null;
+    public NodeType<T> reverseList() {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        
         NodeType<T> current = head;
+        NodeType<T> temp = null;
+        
+        // Swap next and back pointers for all nodes
         while (current != null) {
+            // Store the back pointer
             temp = current.back;
+            
+            // Swap the back and next pointers
             current.back = current.next;
             current.next = temp;
+            
+            // Move to the next node
+            // (Using back because we just swapped pointers)
             current = current.back;
         }
-        if (temp != null) head = temp.back;
-        print();
+        
+        // Update the head to point to the last node
+        if (temp != null) {
+            head = temp.back;
+        }
+        
+        return head;
     }
 
     public void swapAlt() {
@@ -127,5 +142,22 @@ public class DoublyLinkedList<T extends Comparable<T>> {
 
     public NodeType<T> getFirst() {
         return head;
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        if (head == null) {
+            return result;
+        }
+        NodeType<T> current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        while (current != null) {
+            result += current.info + " ";
+            current = current.back;
+        }
+        return result;
     }
 }
